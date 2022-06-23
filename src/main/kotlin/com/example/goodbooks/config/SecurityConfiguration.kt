@@ -10,6 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
+import java.util.*
 
 
 @Configuration
@@ -32,8 +36,13 @@ class SecurityConfiguration(val userService: UserService){
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
 
-        http.authorizeRequests()
+        http
+            .csrf().disable()
+            .cors().and()
+
+            .authorizeRequests()
             .antMatchers(
+                "/addbook",
                 "/registration**",
                 "/js/**",
                 "/css/**",
@@ -41,10 +50,12 @@ class SecurityConfiguration(val userService: UserService){
                 ).permitAll()
             .anyRequest().authenticated()
             .and()
+
             .formLogin()
                 .loginPage("/login")
                 .permitAll()
             .and()
+
             .logout()
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
@@ -53,6 +64,17 @@ class SecurityConfiguration(val userService: UserService){
                 .permitAll()
 
         return http.build()
+    }
+
+
+    @Bean
+    open fun corsConfigurationSource(): CorsConfigurationSource {
+        val configuration = CorsConfiguration()
+        configuration.allowedOrigins = listOf("*")
+        configuration.allowedMethods = listOf("GET", "POST")
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", configuration)
+        return source
     }
 }
 

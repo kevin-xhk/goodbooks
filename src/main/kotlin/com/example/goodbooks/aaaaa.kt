@@ -1,8 +1,7 @@
 package com.example.goodbooks
 
-import com.example.goodbooks.models.User
-import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.web.cors.CorsConfiguration
+
 
 class aaaaa {
     //    public User save(UserRegistrationDto userRegistrationDto) {
@@ -12,5 +11,7 @@ class aaaaa {
     //                userRegistrationDto.getPassword()
     //                Arrays)
     //    }
+
+
 
 }

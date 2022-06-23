@@ -23,4 +23,19 @@ class User (
         inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
     )
     var roles:Collection<Role>,
+
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+//    @JoinTable(
+//        name = "users_books",
+//        joinColumns = [JoinColumn( name = "user_id", referencedColumnName = "id")],
+//        inverseJoinColumns = [JoinColumn(name = "book_id", referencedColumnName = "workId")]
+//    )
+    @OneToMany(
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true,
+    )
+    var books:Collection<UserBook>,
+
+//    @OneToMany(mappedBy = "user")
+//    var bookEntries: List<BookEntry>
 )

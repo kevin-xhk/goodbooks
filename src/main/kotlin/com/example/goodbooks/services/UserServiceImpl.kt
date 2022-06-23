@@ -5,6 +5,7 @@ import com.example.goodbooks.models.User
 import com.example.goodbooks.repos.UserRepository
 import com.example.goodbooks.web.dto.UserRegistrationDto
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.jpa.repository.Query
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -26,6 +27,7 @@ class UserServiceImpl (
             email     = urDto.email,
             password  = BCryptPasswordEncoder().encode(urDto.password),
             roles     = listOf(Role(name ="ROLE_USER")),
+            books     = listOf()
         )
 
         return userRepo.save(user)
@@ -35,7 +37,7 @@ class UserServiceImpl (
 
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails {
-        val user: User = userRepo.findByEmail(username)
+            val user: User = userRepo.findByEmail(username)
             ?: throw UsernameNotFoundException("Invalid username or password.")
 
         return org.springframework.security.core.userdetails.User(
@@ -59,5 +61,7 @@ class UserServiceImpl (
             .collect(Collectors.toList())
 
     }
+
+
 
 }

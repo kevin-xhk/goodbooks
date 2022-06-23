@@ -39,21 +39,13 @@
 
 <div class="container">
     <br><br><br>
-    <h1>welcome, <span id="username" sec:authentication="principal.username">User</span></h1>
+    <h1><span id="username" sec:authentication="principal.username">User</span>'s collection</h1>
 
     <div id="content">
-        
-        <label>search by author or book name</label>
-        <input type="text" id="search-input" name="search" placeholder="search...">
-        <input type="button" id="search-btn" name="search-button" value="search" onclick="apiCall()">
-        <br><br>
-        <div id="search-results">
-
-        </div>
 
     </div>
 </div>
 
 </body>
-<script th:src="@{scripts/openlibSearchApi.js}"></script>
+<script th:src="@{scripts/collections.js}"></script>
 </html>

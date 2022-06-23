@@ -11,4 +11,7 @@ class MainController {
 
     @GetMapping("/")
     fun home(): String = "index"
+
+    @GetMapping("/collection")
+    fun collection(): String = "collection"
 }
