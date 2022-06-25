@@ -8,6 +8,7 @@ class UserBook (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
 
+//    @Column(name = "user_email")
     var userEmail: String,
 
     var workId: String,

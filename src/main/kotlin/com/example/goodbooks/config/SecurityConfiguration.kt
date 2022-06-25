@@ -1,7 +1,6 @@
 package com.example.goodbooks.config
 
 import com.example.goodbooks.services.UserService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
@@ -67,8 +66,8 @@ class SecurityConfiguration(val userService: UserService){
     }
 
 
-    @Bean
-    open fun corsConfigurationSource(): CorsConfigurationSource {
+    @Bean("corsConfigurationSource")
+    fun corsConfigurationSource(): CorsConfigurationSource? {
         val configuration = CorsConfiguration()
         configuration.allowedOrigins = listOf("*")
         configuration.allowedMethods = listOf("GET", "POST")

@@ -9,17 +9,16 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @CrossOrigin
-@RequestMapping("/books")
 class BookController (
     private val service: UserBookService,
-    private val userService: UserService,
+//    private val userService: UserService,
 ){
 
-    @PostMapping
-    @CrossOrigin
+    @PostMapping("/books")
+//    @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
-    fun addUserBook(@RequestParam workId: String, @RequestParam userEmail: String): String {
-         service.addUserBook(
+    fun addUserBook(@RequestParam workId: String, @RequestParam userEmail: String): UserBook? {
+        return service.addUserBook(
             UserBook(
                 userEmail = userEmail,
                 workId = workId,
@@ -27,14 +26,14 @@ class BookController (
                 status = "",
             )
         )
-
-        return "redirect:/books/$userEmail"
     }
 
-    @GetMapping("/{userEmail}")
-    @CrossOrigin
+    @GetMapping("/books/{userEmail}")
     fun returnUserBooks(@PathVariable userEmail: String): Collection<UserBook>
         = service.getUserBooks(userEmail)
 
 
+    @GetMapping("/book")
+    fun getUserBook(@RequestParam workId: String, @RequestParam userEmail: String): UserBook?
+        = service.getUserBook(userEmail, workId)
 }

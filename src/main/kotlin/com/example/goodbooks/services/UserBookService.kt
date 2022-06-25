@@ -7,14 +7,18 @@ import org.springframework.stereotype.Service
 @Service
 class UserBookService (private val ubRepo: UserBookRepository){
 
-    fun getUserBook(userEmail: String, workId: String): UserBook
+    fun getUserBook(userEmail: String, workId: String): UserBook?
         = ubRepo.findByUserEmailAndWorkId(userEmail, workId)
 
     fun getUserBooks(userEmail: String): List<UserBook>
         = ubRepo.findByUserEmail(userEmail)
 
-    fun addUserBook(userbook: UserBook): UserBook
-        = ubRepo.save(userbook)
+    fun addUserBook(userbook: UserBook): UserBook? {
+        if(getUserBook(userEmail = userbook.userEmail, workId = userbook.workId) == null){
+            return ubRepo.save(userbook)
+        }
+        return null
+    }
 
     fun updateUserBook(userbook: UserBook) {
         var ub: UserBook = ubRepo.findByUserEmailAndWorkId(userbook.userEmail, userbook.workId)
