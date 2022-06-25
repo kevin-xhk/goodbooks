@@ -26,12 +26,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" th:href="@{/}">Registration / Login Module</a>
+            <a class="navbar-brand" href="#" th:href="@{/}">goodbooks</a>
         </div>
         <!-- logout div -->
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="navbar navbar-nav">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/collection}">Collection</a></li>
             </ul>
         </div>
     </div>

@@ -42,6 +42,7 @@ class SecurityConfiguration(val userService: UserService){
             .authorizeRequests()
             .antMatchers(
                 "/addbook",
+                "/updatebook",
                 "/registration**",
                 "/js/**",
                 "/css/**",

@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.*
 @CrossOrigin
 class BookController (
     private val service: UserBookService,
-//    private val userService: UserService,
 ){
 
+    // "/books" mappings
     @PostMapping("/books")
-//    @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     fun addUserBook(@RequestParam workId: String, @RequestParam userEmail: String): UserBook? {
         return service.addUserBook(
@@ -32,8 +31,19 @@ class BookController (
     fun returnUserBooks(@PathVariable userEmail: String): Collection<UserBook>
         = service.getUserBooks(userEmail)
 
+    @GetMapping("/books/{userEmail}/works/{workId}")
+//    fun getUserBook(@RequestParam workId: String, @RequestParam userEmail: String): UserBook?
+    fun getUserBook(@PathVariable userEmail: String, @PathVariable workId: String): UserBook?
+        = service.getUserBook(userEmail, "/works/$workId")
 
-    @GetMapping("/book")
-    fun getUserBook(@RequestParam workId: String, @RequestParam userEmail: String): UserBook?
-        = service.getUserBook(userEmail, workId)
+
+    // "/updatebook" mappings
+    @PatchMapping("/updatebook")
+    fun updateBook(@RequestBody userBook: UserBook): UserBook
+        = service.updateUserBook(userBook)
+
+    @DeleteMapping("/updatebook")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteBank(@RequestBody userBook: UserBook): Unit
+        = service.deleteUserBook(userBook)
 }

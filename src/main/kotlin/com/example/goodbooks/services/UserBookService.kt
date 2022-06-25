@@ -14,21 +14,23 @@ class UserBookService (private val ubRepo: UserBookRepository){
         = ubRepo.findByUserEmail(userEmail)
 
     fun addUserBook(userbook: UserBook): UserBook? {
-        if(getUserBook(userEmail = userbook.userEmail, workId = userbook.workId) == null){
+//        if(getUserBook(userEmail = userbook.userEmail, workId = userbook.workId) == null){
             return ubRepo.save(userbook)
-        }
+//        }
         return null
     }
 
-    fun updateUserBook(userbook: UserBook) {
+    fun updateUserBook(userbook: UserBook) : UserBook {
         var ub: UserBook = ubRepo.findByUserEmailAndWorkId(userbook.userEmail, userbook.workId)
 
         ub.review = userbook.review
         ub.status = userbook.status
 
-        ubRepo.save(ub)
+        return ubRepo.save(ub)
     }
 
-    fun deleteUserBook(userbook: UserBook)
-        = ubRepo.delete(userbook)
+    fun deleteUserBook(userbook: UserBook) {
+        var toDelete = ubRepo.findByUserEmailAndWorkId(userbook.userEmail, userbook.workId)
+        ubRepo.delete(toDelete)
+    }
 }

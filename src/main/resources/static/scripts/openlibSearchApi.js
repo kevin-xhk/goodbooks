@@ -74,7 +74,7 @@ function sendBook( workID ){
     var json = JSON.stringify(data);
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/addbook/");
+    xhr.open("POST", "/books/");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(json);
 }

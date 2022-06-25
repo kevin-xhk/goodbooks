@@ -16,6 +16,6 @@ class MainController {
     @GetMapping("/collection")
     fun collection(): String = "collection"
 
-    @GetMapping("/updatebook")
-    fun updatebook(): String = "updatebook"
+//    @GetMapping("/updatebook")
+//    fun updatebook(): String = "updatebook"
 }
