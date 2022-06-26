@@ -16,10 +16,10 @@ class BookController (
     // "/books" mappings
     @PostMapping("/books")
     @ResponseStatus(HttpStatus.CREATED)
-    fun addUserBook(@RequestParam workId: String, @RequestParam userEmail: String): UserBook? {
+    fun addUserBook(@RequestParam("workId") workId: String, @RequestParam("userEmail") userEmail: String): UserBook? {
         return service.addUserBook(
             UserBook(
-                userEmail = userEmail,
+                userEmail = userEmail   ,
                 workId = workId,
                 review = 0,
                 status = "",
